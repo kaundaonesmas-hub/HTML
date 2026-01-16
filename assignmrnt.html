@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Skills Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>User Information</h2>
+
+    <form id="userForm">
+        <label>
+            Name:
+            <input type="text" id="name" required>
+        </label>
+        <br><br>
+
+        <label>
+            Age:
+            <input type="number" id="age" required>
+        </label>
+        <br><br>
+
+        <label>
+            <input type="checkbox" value="Python" class="skill">
+            Python
+        </label>
+
+        <label>
+            <input type="checkbox" value="JavaScript" class="skill">
+            JavaScript
+        </label>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+
+            const skills = [];
+            document.querySelectorAll(".skill:checked").forEach(skill => {
+                skills.push(skill.value);
+            });
+
+            let skillText;
+            if (skills.length === 0) {
+                skillText = "cannot code yet";
+            } else if (skills.length === 1) {
+                skillText = "can code in " + skills[0];
+            } else {
+                skillText = "can code in " + skills.join(" and ");
+            }
+
+            document.getElementById("result").textContent =
+                `My name is ${name}, I am ${age} years old and ${skillText}.`;
+        });
+    </script>
+
+</body>
+</html>
